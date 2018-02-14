@@ -4,7 +4,9 @@ import entities.*;
 
 import java.util.ArrayList;
 import java.util.Stack;
-
+/**
+ * Game Logic actually is a Tree
+ */
 public class GameLogic {
     private Board board;
     private ArrayList<Hexagon> leaves = new ArrayList<>();
@@ -106,7 +108,10 @@ public class GameLogic {
     }
     public States getWinner() {
         logLeaves();
-        int counter = 0;
+        ArrayList<Hexagon> checklist = new ArrayList<>();
+        boolean [] conditions = new boolean[2];
+        conditions[0] = false;
+        conditions[1] = false;
         States state = States.empty;
         if (!leaves.isEmpty()) {
             if (leaves.get(0).getState() == States.blue) {
@@ -119,25 +124,61 @@ public class GameLogic {
         }
         if (state == States.red) {
             for (Hexagon i : leaves) {
-                    if (i.getY() == 0 || i.getY() == 7) {
-                        counter++;
+                if (i.getY() == 0 || i.getY() == 7) {
+                        checklist.add(i);
                     }
+            }
+            if (!checklist.isEmpty()) {
+                for (Hexagon i : checklist) {
+                    if (i.getY() == 0) {
+                        conditions[0] = true;
+                        checklist.remove(i);
+                    }
+                }
+            } else {
+                System.err.println("NO Winner detected!");
+            }
+            if (!checklist.isEmpty()) {
+                if (checklist.get(0).getY() == 7) {
+                    conditions[1] = true;
+                }
+            } else {
+                System.err.println("NO Winner detected!");
+            }
+
+            if (conditions[0] && conditions[1]) {
+                return States.red;
             }
         } else if (state == States.blue) {
             for (Hexagon i : leaves) {
                 if (i.getX() == 0 || i.getX() == 7) {
-                    counter++;
+                    checklist.add(i);
                 }
             }
-        } else {
-            System.err.println("Error in getWinner Function at GameLogic class: part2");
-        }
-        if (counter >= 2) {
-            if (state == States.red || state == States.blue) {
-                return state;
+            if (!checklist.isEmpty()) {
+                for (Hexagon i : checklist) {
+                    if (i.getX() == 0) {
+                        conditions[0] = true;
+                        checklist.remove(i);
+                    }
+                }
+            } else {
+                System.err.println("NO Winner detected!");
             }
-        }
+            if (!checklist.isEmpty()) {
+                if (checklist.get(0).getX() == 7) {
+                    conditions[1] = true;
+                }
+            } else {
+                System.err.println("NO Winner detected!");
+            }
 
+            if (conditions[0] && conditions[1]) {
+                return States.blue;
+            }
+        } else {
+            System.err.println("NO Winner detected!");
+        }
         return States.empty;
     }
 
