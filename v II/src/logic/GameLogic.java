@@ -161,7 +161,7 @@ public class GameLogic {
                         conditions[0] = true;
                         checklist.remove(i);
                     }
-                }
+                }//sddf
             } else {
                 System.err.println("NO Winner detected!");
             }
