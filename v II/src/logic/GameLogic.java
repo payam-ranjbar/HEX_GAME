@@ -129,10 +129,13 @@ public class GameLogic {
                     }
             }
             if (!checklist.isEmpty()) {
-                for (Hexagon i : checklist) {
-                    if (i.getY() == 0) {
+                for (int i = 0; i < checklist.size(); i++) {
+                    if (checklist.get(i).getY() == 0) {
                         conditions[0] = true;
-                        checklist.remove(i);
+                        checklist.remove(checklist.get(i));
+                        if (checklist.isEmpty()) {
+                            break;
+                        }
                     }
                 }
             } else {
@@ -156,12 +159,15 @@ public class GameLogic {
                 }
             }
             if (!checklist.isEmpty()) {
-                for (Hexagon i : checklist) {
-                    if (i.getX() == 0) {
+                for (int i = 0; i < checklist.size(); i++) {
+                    if (checklist.get(i).getX() == 0) {
                         conditions[0] = true;
-                        checklist.remove(i);
+                        checklist.remove(checklist.get(i));
+                        if (checklist.isEmpty()) {
+                            break;
+                        }
                     }
-                }//sddf
+                }
             } else {
                 System.err.println("NO Winner detected!");
             }
