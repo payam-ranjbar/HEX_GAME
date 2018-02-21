@@ -1,6 +1,6 @@
 package entities;
 
-import entities.*;
+import ai.AI;
 
 public class GamePlay {
     private Player player1;

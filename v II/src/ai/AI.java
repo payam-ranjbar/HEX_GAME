@@ -1,4 +1,8 @@
-package entities;
+package ai;
+
+import entities.Identity;
+import entities.Player;
+import entities.PlayerMove;
 
 public class AI extends Player {
     public AI(Identity id , int turn) {
@@ -8,5 +12,8 @@ public class AI extends Player {
     @Override
     public PlayerMove play() {
         return null;
+    }
+    public void perform(){
+
     }
 }
