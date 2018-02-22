@@ -132,4 +132,5 @@ public class Analyzer {
         }
         return sameBPoints;
     }
+
 }
