@@ -15,15 +15,24 @@ public class GameScreen extends JFrame {
     final static ImageIcon YELLOW = new ImageIcon("assets/b1.png");
     final static ImageIcon BLACK = new ImageIcon("assets/b0.png");
     final static ImageIcon RED = new ImageIcon("assets/b2.png");
+    final static ImageIcon THINKING = new ImageIcon("assets/thinking.gif");
     final static int HEIGHT = 480;
     final static int WIDTH = 640;
     GuiHexagons[][] hexagons = new GuiHexagons[8][8];
     JLabel restartButton;
+    JLabel thinking = new JLabel(THINKING);
     GamePlay game;
     Board board;
     GameModes mode;
 
     public GameScreen(GamePlay gamePlay, Board board) {
+        thinking.setBounds(10, 20, 50, 50);
+        thinking.setVisible(true);
+        JLabel think = new JLabel("thinkingg ...");
+        think.setSize(60,20);
+        think.setBounds(5, 0, think.getWidth(), think.getHeight());
+     //   add(thinking);
+        add(think);
         game = gamePlay;
         this.board = board;
         setSize(WIDTH,HEIGHT);
