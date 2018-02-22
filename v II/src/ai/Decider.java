@@ -8,14 +8,14 @@ import entities.States;
 import java.util.ArrayList;
 
 public class Decider {
-    Board board;
-    Analyzer analyzer;
-    public Decider(GamePlay gamePlay, Analyzer analyzer) {
+    private Board board;
+    private Analyzer analyzer;
+    private Listener listener;
+    public Decider(GamePlay gamePlay, Analyzer analyzer, Listener listener) {
         board = gamePlay.getBoard();
         this.analyzer = analyzer;
     }
     public Hexagon getBestChoice() {
-
         return null;
     }
 

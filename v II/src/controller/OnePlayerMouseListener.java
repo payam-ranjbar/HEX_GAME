@@ -70,6 +70,7 @@ public class OnePlayerMouseListener implements MouseListener {
                 board.setState(elementXPos, elementYPos, States.blue);
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
                 hex = board.hexagons[elementXPos][elementYPos];
+                henry.getListener().set(hex);
                 henry.play();
             }
             getWinner(hex);
@@ -81,6 +82,8 @@ public class OnePlayerMouseListener implements MouseListener {
                 board.setState(elementXPos, elementYPos, States.red);
                 hex = board.hexagons[elementXPos][elementYPos];
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
+
+                henry.getListener().set(hex);
                 henry.play();
             }
 
