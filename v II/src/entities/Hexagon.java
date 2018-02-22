@@ -7,6 +7,8 @@ public class Hexagon {
     private int yPos;
     private Attributes attribute;
     private States state;
+    private Positions position;
+    private Locations location;
     private boolean checked;
 
     public Hexagon(int x, int y) {
@@ -15,6 +17,9 @@ public class Hexagon {
         yPos = y;
         state = States.empty;
         attribute = Attributes.none;
+        position = Positions.notSet;
+        location = Locations.notSet;
+
     }
 
     public Hexagon() {
@@ -23,6 +28,8 @@ public class Hexagon {
         yPos = 0;
         state = States.empty;
         attribute = Attributes.none;
+        position = Positions.notSet;
+        location = Locations.notSet;
     }
     public void setX(int i) {
         xPos = i;
@@ -64,6 +71,22 @@ public class Hexagon {
         } else {
             attribute = att;
         }
+    }
+
+    public Locations getLocation() {
+        return location;
+    }
+
+    public Positions getPosition() {
+        return position;
+    }
+
+    public void setLocation(Locations location) {
+        this.location = location;
+    }
+
+    public void setPosition(Positions position) {
+        this.position = position;
     }
 
     @Override
