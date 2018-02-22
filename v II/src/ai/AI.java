@@ -20,4 +20,14 @@ public class AI {
         this.turn = turn;
     }
 
+    public void beginGame() {
+
+    }
+    public void play() {
+
+    }
+    public Listener getListener(){
+       return listener;
+    }
+
 }

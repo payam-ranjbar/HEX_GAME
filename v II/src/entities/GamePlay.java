@@ -17,7 +17,7 @@ public class GamePlay {
         gameState = GameStates.play;
 
         gameMode = mode;
-        if(gameMode == GameModes.PersonVsPerson) {
+/*        if(gameMode == GameModes.PersonVsPerson) {
             player1 = new Person(Identity.bluePerson, 1);
             player2 = new Person(Identity.redPerson, 2);
         } else if(gameMode == GameModes.PersonVsAI) {
@@ -29,7 +29,7 @@ public class GamePlay {
         } else if(gameMode == GameModes.AIvsAI) {
             player1 = new AI(Identity.blueAI, 1);
             player2 = new AI(Identity.redAI, 2);
-        }
+        }*/
     }
 
     public Board getBoard() {

@@ -11,6 +11,12 @@ public class Analyzer {
     ArrayList<Hexagon> oppositeBPoints;
     ArrayList<Hexagon> sameBPoints;
 
+    public void analyze(Hexagon hex, Board board){
+        getEmptyBPoints(hex, board);
+        getOppositeBPoints(hex, board);
+        getSameBPoints(hex, board);
+    }
+
     public ArrayList<Hexagon> getEmptyBPoints(Hexagon hex, Board board) {
         int x = hex.getX();
         int y = hex.getY();
