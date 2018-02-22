@@ -1,8 +1,9 @@
 package gui;
 
+import controller.OnePlayerMouseListener;
 import controller.RestartButtonListener;
 import entities.GamePlay;
-import controller.HexagonsMouseListener;
+import controller.TwoPlayerMouseListener;
 import entities.*;
 
 import javax.swing.*;
@@ -34,6 +35,7 @@ public class GameScreen extends JFrame {
      //   add(thinking);
         add(think);
         game = gamePlay;
+        mode = gamePlay.getGameMode();
         this.board = board;
         setSize(WIDTH,HEIGHT);
         setTitle("HEX The Game");
@@ -67,7 +69,11 @@ public class GameScreen extends JFrame {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++){
                 hexagons[i][j].setBounds((j*40) + dist + 20 ,(i*(35)) + 20 , 40, 47);
-                hexagons[i][j].getElement().addMouseListener(new HexagonsMouseListener(this, game, i, j));
+                if (mode == GameModes.PersonVsPerson) {
+                    hexagons[i][j].getElement().addMouseListener(new TwoPlayerMouseListener(this, game, i, j));
+                } else {
+                    hexagons[i][j].getElement().addMouseListener(new OnePlayerMouseListener());
+                }
                 add(hexagons[j][i].getElement());
             }
             dist -= 20;
@@ -106,4 +112,8 @@ public class GameScreen extends JFrame {
         restartButton.addMouseListener(new RestartButtonListener(restartButton, this));
     }
 
+
+    public void setHexagonsState(int x, int y, States state) {
+        hexagons[x][y].setIcon(state.getImageIcon());
+    }
 }

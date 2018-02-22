@@ -14,7 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class HexagonsMouseListener implements MouseListener {
+public class TwoPlayerMouseListener implements MouseListener {
     final static ImageIcon SELECTED_YELLOW = new ImageIcon("assets/b_glow_yellow.png");
     final static ImageIcon SELECTED_RED = new ImageIcon("assets/b_glow_gray.png");
     final static ImageIcon SELECTED = new ImageIcon("assets/b_glow.png");
@@ -35,7 +35,7 @@ public class HexagonsMouseListener implements MouseListener {
     private int elementXPos;
     private int elementYPos;
 
-    public HexagonsMouseListener(GameScreen gHex, GamePlay game, int x, int y) {
+    public TwoPlayerMouseListener(GameScreen gHex, GamePlay game, int x, int y) {
         hex = new Hexagon();
         elementXPos = x;
         elementYPos = y;
