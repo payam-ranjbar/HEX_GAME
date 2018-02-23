@@ -29,11 +29,6 @@ public class GameScreen extends JFrame {
     public GameScreen(GamePlay gamePlay, Board board) {
         thinking.setBounds(10, 20, 50, 50);
         thinking.setVisible(true);
-        JLabel think = new JLabel("thinkingg ...");
-        think.setSize(60,20);
-        think.setBounds(5, 0, think.getWidth(), think.getHeight());
-     //   add(thinking);
-        add(think);
         game = gamePlay;
         mode = gamePlay.getGameMode();
         this.board = board;
