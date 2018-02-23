@@ -3,6 +3,7 @@ package ai;
 import entities.*;
 import gui.GameScreen;
 
+import java.util.Collections;
 import java.util.Random;
 
 public class AI {
@@ -27,7 +28,23 @@ public class AI {
         performer = new Performer(gp,gui);
     }
 
-    public void beginGame() {
+    public int [] beginGame() {
+        Collections.shuffle(board.foolishZoneList);
+        Hexagon temp = board.foolishZoneList.get(0);
+
+        for (int i = 0; i < board.foolishZoneList.size(); i++ ) {
+            if ( board.foolishZoneList.get(i).getState() == States.empty) {
+                temp = board.foolishZoneList.get(i);
+                break;
+            }
+        }
+        int x = temp.getX();
+        int y = temp.getY();
+        performer.setHex(x, y, color);
+        int [] result = new int [2];
+        result[0] = x;
+        result[1] = y;
+        return result;
 
     }
     public int [] play() {

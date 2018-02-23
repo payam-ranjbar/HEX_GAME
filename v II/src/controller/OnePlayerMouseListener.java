@@ -36,6 +36,7 @@ public class OnePlayerMouseListener implements MouseListener {
     private int elementYPos;
     private GameModes mode;
 
+
     public OnePlayerMouseListener(GameScreen gHex, GamePlay game, int x, int y) {
         hex = new Hexagon();
         elementXPos = x;
@@ -51,9 +52,22 @@ public class OnePlayerMouseListener implements MouseListener {
 
         if(mode == GameModes.AIvsPerson) {
             henry = new AI(1, States.blue, gamePlay, view);
-            henry.beginGame();
+            turn = readDataFromTurnSaverFile();
+
+            if (turn == 49) {
+                changeTurnSaverFile("2");
+                turn = 50;
+                int [] pos = henry.beginGame();
+                //  System.out.println("AI begins whith hex at x = " + pos[0] +" y = " + pos[1]);
+                System.out.println("AI begins");
+                view.getHexagons(pos[0], pos[1]).setIcon(YELLOW);
+                view.getHexagons(pos[0], pos[1]).setState(States.blue);
+            }
+
+
         } else {
             henry = new AI(2, States.red, gamePlay, view);
+
         }
 
 
@@ -61,7 +75,6 @@ public class OnePlayerMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        turn = readDataFromTurnSaverFile();
         if (mode == GameModes.PersonVsAI) {
             if (guiHex.getState()  == States.empty) {
                 System.out.println("Player 'YELLOW' Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
@@ -80,6 +93,9 @@ public class OnePlayerMouseListener implements MouseListener {
             }
             getWinner(hex);
         }else if (mode == GameModes.AIvsPerson) {
+
+            System.out.println("Game Mode is AI vs Human");
+            System.out.println("turn is = " + turn);
             if (guiHex.getState()  == States.empty) {
                 System.out.println("Player 'RED'    Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
                 guiHex.setIcon(RED);
@@ -88,15 +104,15 @@ public class OnePlayerMouseListener implements MouseListener {
                 board.setState(elementXPos, elementYPos, States.red);
                 hex = board.hexagons[elementXPos][elementYPos];
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
-                henry.getDecider().setBoard(board);
-                henry.getListener().set(hex, board);
-                int [] pos = new int[2];
-                pos = henry.play();
-                view.getHexagons(pos[0], pos[1]).setIcon(YELLOW);
-                view.getHexagons(pos[0], pos[1]).setState(States.blue);
-
+                if (turn == 50) {
+                    henry.getDecider().setBoard(board);
+                    henry.getListener().set(hex, board);
+                    int [] pos ;
+                    pos = henry.play();
+                    view.getHexagons(pos[0], pos[1]).setIcon(YELLOW);
+                    view.getHexagons(pos[0], pos[1]).setState(States.blue);
+                }
             }
-
             getWinner(hex);
         }
 
