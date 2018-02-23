@@ -2,15 +2,17 @@ package ai;
 
 import entities.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 public class Analyzer {
     ArrayList<Hexagon> emptyBPoints;
+    ArrayList<Hexagon> sameAdjacent;
+    ArrayList<Hexagon> emptyAdjacent;
     ArrayList<Hexagon> oppositeBPoints;
     ArrayList<Hexagon> sameBPoints;
     public Analyzer() {
         emptyBPoints = new ArrayList<>();
+        emptyAdjacent = new ArrayList<>();
     }
 
     public void analyze(Hexagon hex, Board board){
@@ -20,6 +22,7 @@ public class Analyzer {
     }
 
     public void analyzeEmptyBPoints(Hexagon hex, Board board) {
+
         int x = hex.getX();
         int y = hex.getY();
         boolean isUpside = hex.getPosition() == Positions.upSide;
@@ -64,6 +67,7 @@ public class Analyzer {
     }
 
     public ArrayList<Hexagon> getEmptyBPoints(Hexagon hex, Board board) {
+        emptyBPoints = new ArrayList<>();
         int x = hex.getX();
         int y = hex.getY();
 
@@ -126,7 +130,7 @@ public class Analyzer {
         States OppositeState = hex.getState().reverse();
         int x = hex.getX();
         int y = hex.getY();
-
+        oppositeBPoints = new ArrayList<>();
         if ((x - 1) > 0 && (y - 2) > 0) {
             if (board.hexagons[x - 1][y - 2].getState() == OppositeState) {
                 emptyBPoints.add(board.hexagons[x - 1][y - 2]);
@@ -167,6 +171,7 @@ public class Analyzer {
         States state = hex.getState();
         int x = hex.getX();
         int y = hex.getY();
+        sameBPoints = new ArrayList<>();
 
         if ((x - 1) >= 0 && (y - 2) >= 0) {
             if (board.hexagons[x - 1][y - 2].getState() == state) {
@@ -213,4 +218,93 @@ public class Analyzer {
         return sameBPoints;
     }
 
+
+    public ArrayList<Hexagon> analyzeSameAdjacent(Hexagon hex, Board board) {
+        int i = hex.getX();
+        int j = hex.getY();
+        sameAdjacent = new ArrayList<>();
+        //int dimension = board.getDimension();
+        int dimension = 8;
+
+        // i constant
+        if ( !((j+1) > dimension - 1 ) ) {
+            if(board.hexagons[i][j+1].getState() == hex.getState()) {
+                sameAdjacent.add(board.hexagons[i][j+1]);
+            }
+        }
+        if ( !((j-1) < 0) ) {
+            if(board.hexagons[i][j-1].getState() == hex.getState()) {
+        sameAdjacent.add(board.hexagons[i][j-1]);
+    }
+}
+//j constant
+        if ( !((i+1) > dimension - 1 ) ) {
+                if(board.hexagons[i+1][j].getState() == hex.getState()) {
+                sameAdjacent.add(board.hexagons[i+1][j]);
+                }
+                }
+                if ( !((i-1) < 0) ) {
+        if(board.hexagons[i-1][j].getState() == hex.getState()) {
+        sameAdjacent.add(board.hexagons[i-1][j]);
+        }
+        }
+        // i-1 j-1
+        if ( (!((j-1) < 0)) && !((i-1) < 0 ) ) {
+        if(board.hexagons[i-1][j-1].getState() == hex.getState()) {
+        sameAdjacent.add(board.hexagons[i-1][j-1]);
+
+        }
+        }
+        //i+1 j+1
+        if ( (!((j+1) > dimension - 1)) && !((i+1) > dimension - 1) ) {
+        if(board.hexagons[i+1][j+1].getState() == hex.getState()) {
+        sameAdjacent.add(board.hexagons[i+1][j+1]);
+        }
+        }
+        return sameAdjacent;
+        }
+    public ArrayList<Hexagon> analyzeEmptyAdjacent(Hexagon hex, Board board) {
+        int i = hex.getX();
+        int j = hex.getY();
+        emptyAdjacent = new ArrayList<>();
+        //int dimension = board.getDimension();
+        int dimension = 8;
+
+        // i constant
+        if ( !((j+1) > dimension - 1 ) ) {
+            if(board.hexagons[i][j+1].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i][j+1]);
+            }
+        }
+        if ( !((j-1) < 0) ) {
+            if(board.hexagons[i][j-1].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i][j-1]);
+            }
+        }
+//j constant
+        if ( !((i+1) > dimension - 1 ) ) {
+            if(board.hexagons[i+1][j].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i+1][j]);
+            }
+        }
+        if ( !((i-1) < 0) ) {
+            if(board.hexagons[i-1][j].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i-1][j]);
+            }
+        }
+        // i-1 j-1
+        if ( (!((j-1) < 0)) && !((i-1) < 0 ) ) {
+            if(board.hexagons[i-1][j-1].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i-1][j-1]);
+
+            }
+        }
+        //i+1 j+1
+        if ( (!((j+1) > dimension - 1)) && !((i+1) > dimension - 1) ) {
+            if(board.hexagons[i+1][j+1].getState() == States.empty) {
+                emptyAdjacent.add(board.hexagons[i+1][j+1]);
+            }
+        }
+        return emptyAdjacent;
+    }
 }

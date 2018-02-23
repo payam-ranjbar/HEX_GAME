@@ -3,10 +3,7 @@ package ai;
 import entities.Board;
 import entities.GamePlay;
 import entities.Hexagon;
-import entities.States;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
@@ -33,7 +30,18 @@ public class Decider {
         analyzer.analyzeEmptyBPoints(listener.getHex(), listener.board);
         Random rnd = new Random();
         Collections.shuffle(analyzer.emptyBPoints);
-        return analyzer.emptyBPoints.get(0);
+        if (!analyzer.emptyBPoints.isEmpty()) {
+            return analyzer.emptyBPoints.get(0);
+        } else {
+            analyzer.analyzeSameAdjacent(listener.getHex(), listener.getBoard());
+            Collections.shuffle(analyzer.sameAdjacent);
+            if (!analyzer.sameAdjacent.isEmpty()) {
+                analyzer.analyzeEmptyAdjacent(analyzer.sameAdjacent.get(0), listener.getBoard());
+            } else {
+                analyzer.analyzeEmptyAdjacent(listener.getHex(), listener.getBoard());
+            }
+            return analyzer.emptyAdjacent.get(0);
+        }
     }
 
 }
