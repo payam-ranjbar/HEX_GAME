@@ -19,8 +19,8 @@ public class GameInit {
 
     public void setGamePlay(GamePlay gp) {
         gamePlay = gp;
-        players[0] = gp.getPlayerByTurn(1);
-        players[1] = gp.getPlayerByTurn(2);
+       // players[0] = gp.getPlayerByTurn(1);
+        //players[1] = gp.getPlayerByTurn(2);
         gameMode = gp.getGameMode();
     }
 

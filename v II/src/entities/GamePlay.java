@@ -39,12 +39,7 @@ public class GamePlay {
     public GameModes getGameMode() {
         return gameMode;
     }
-    public Player getPlayerByTurn(int t) {
-        if(player1.getPlayerTurn() == t) {
-            return player1;
-        }
-        return player2;
-    }
+
 
     public int getPlayerTurn() {
         return playerTurn;

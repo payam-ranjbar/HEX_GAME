@@ -47,8 +47,8 @@ public class TwoPlayerMouseListener implements MouseListener {
         GuiHexagons elemet;
         GameModes mode = game.getGameMode();
 
-        player1 = game.getPlayerByTurn(1);
-        player2 = game.getPlayerByTurn(2);
+        //player1 = game.getPlayerByTurn(1);
+        //player2 = game.getPlayerByTurn(2);
         turn = game.getPlayerTurn();
 
     }

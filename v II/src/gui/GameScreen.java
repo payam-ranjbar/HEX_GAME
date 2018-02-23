@@ -72,7 +72,7 @@ public class GameScreen extends JFrame {
                 if (mode == GameModes.PersonVsPerson) {
                     hexagons[i][j].getElement().addMouseListener(new TwoPlayerMouseListener(this, game, i, j));
                 } else {
-                    hexagons[i][j].getElement().addMouseListener(new OnePlayerMouseListener());
+                    hexagons[i][j].getElement().addMouseListener(new OnePlayerMouseListener(this, game, i, j));
                 }
                 add(hexagons[j][i].getElement());
             }

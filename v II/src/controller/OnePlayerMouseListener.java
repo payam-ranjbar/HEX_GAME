@@ -45,15 +45,15 @@ public class OnePlayerMouseListener implements MouseListener {
         gamePlay = game;
         currentIcon = BLACK;
         board = game.getBoard();
-        GuiHexagons elemet;
+        GuiHexagons elemet = view.getHexagons(elementXPos, elementYPos);
         mode = game.getGameMode();
         turn = game.getPlayerTurn();
 
         if(mode == GameModes.AIvsPerson) {
-            henry = new AI(1, States.blue);
+            henry = new AI(1, States.blue, gamePlay, view);
             henry.beginGame();
         } else {
-            henry = new AI(2, States.red);
+            henry = new AI(2, States.red, gamePlay, view);
         }
 
 
@@ -63,27 +63,28 @@ public class OnePlayerMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         turn = readDataFromTurnSaverFile();
         if (mode == GameModes.PersonVsAI) {
-            if (currentIcon == BLACK) {
+            if (guiHex.getIcon()  == BLACK) {
                 System.out.println("Player 'YELLOW' Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
                 guiHex.setIcon(YELLOW);
                 currentIcon = YELLOW;
                 board.setState(elementXPos, elementYPos, States.blue);
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
                 hex = board.hexagons[elementXPos][elementYPos];
-                henry.getListener().set(hex);
+                henry.getDecider().setBoard(board);
+                henry.getListener().set(hex, board);
                 henry.play();
             }
             getWinner(hex);
         }else if (mode == GameModes.AIvsPerson) {
-            if (currentIcon == BLACK) {
+            if (guiHex.getIcon()  == BLACK) {
                 System.out.println("Player 'RED'    Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
                 guiHex.setIcon(RED);
                 currentIcon = RED;
                 board.setState(elementXPos, elementYPos, States.red);
                 hex = board.hexagons[elementXPos][elementYPos];
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
-
-                henry.getListener().set(hex);
+                henry.getDecider().setBoard(board);
+                henry.getListener().set(hex, board);
                 henry.play();
             }
 
