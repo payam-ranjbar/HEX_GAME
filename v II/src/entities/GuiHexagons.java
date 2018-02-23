@@ -7,6 +7,7 @@ public class GuiHexagons {
     private int y;
     private JLabel element;
     private ImageIcon icon;
+    private States state;
 
     public GuiHexagons(ImageIcon i){
         element = new JLabel(i);
@@ -17,6 +18,7 @@ public class GuiHexagons {
         this.y = y;
         element = new JLabel(i);
         icon = i;
+        state = States.empty;
     }
 
     public void setIcon(Icon i) {
@@ -50,5 +52,11 @@ public class GuiHexagons {
         return element.getIcon();
     }
 
+    public States getState() {
+        return state;
+    }
 
+    public void setState(States state) {
+        this.state = state;
+    }
 }

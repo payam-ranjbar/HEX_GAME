@@ -63,29 +63,38 @@ public class OnePlayerMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         turn = readDataFromTurnSaverFile();
         if (mode == GameModes.PersonVsAI) {
-            if (guiHex.getIcon()  == BLACK) {
+            if (guiHex.getState()  == States.empty) {
                 System.out.println("Player 'YELLOW' Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
                 guiHex.setIcon(YELLOW);
+                guiHex.setState(States.blue);
                 currentIcon = YELLOW;
                 board.setState(elementXPos, elementYPos, States.blue);
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
                 hex = board.hexagons[elementXPos][elementYPos];
                 henry.getDecider().setBoard(board);
                 henry.getListener().set(hex, board);
-                henry.play();
+                int [] pos = new int[2];
+                pos = henry.play();
+                view.getHexagons(pos[0], pos[1]).setIcon(RED);
+                view.getHexagons(pos[0], pos[1]).setState(States.red);
             }
             getWinner(hex);
         }else if (mode == GameModes.AIvsPerson) {
-            if (guiHex.getIcon()  == BLACK) {
+            if (guiHex.getState()  == States.empty) {
                 System.out.println("Player 'RED'    Clicked Hexagon at, X = " + guiHex.getX() + " Y = " + guiHex.getY());
                 guiHex.setIcon(RED);
+                guiHex.setState(States.red);
                 currentIcon = RED;
                 board.setState(elementXPos, elementYPos, States.red);
                 hex = board.hexagons[elementXPos][elementYPos];
                 System.out.println(board.hexagons[elementXPos][elementYPos]);
                 henry.getDecider().setBoard(board);
                 henry.getListener().set(hex, board);
-                henry.play();
+                int [] pos = new int[2];
+                pos = henry.play();
+                view.getHexagons(pos[0], pos[1]).setIcon(YELLOW);
+                view.getHexagons(pos[0], pos[1]).setState(States.blue);
+
             }
 
             getWinner(hex);
@@ -117,11 +126,18 @@ public class OnePlayerMouseListener implements MouseListener {
         }
 
 
+
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        guiHex.setIcon(currentIcon);
+        if (guiHex.getState() == States.empty) {
+            guiHex.setIcon(BLACK);
+        } else if (guiHex.getState() == States.blue) {
+            guiHex.setIcon(YELLOW);
+        } else {
+            guiHex.setIcon(RED);
+        }
 
     }
 

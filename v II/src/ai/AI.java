@@ -30,7 +30,7 @@ public class AI {
     public void beginGame() {
 
     }
-    public void play() {
+    public int [] play() {
        Hexagon temp = decider.getBestChoice();
        int x = temp.getX();
        int y = temp.getY();
@@ -41,6 +41,10 @@ public class AI {
 //        int xpos = analyzer.emptyBPoints.get(i).getX();
       //  int ypos = analyzer.emptyBPoints.get(j).getY();
        performer.setHex(x, y, color);
+       int [] result = new int [2];
+       result[0] = x;
+       result[1] = y;
+       return result;
 
     }
     public Listener getListener(){
