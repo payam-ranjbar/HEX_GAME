@@ -35,18 +35,27 @@ public class Analyzer {
         if (isUpside) {
             for (int i = 0; i < emptyBPoints.size(); i++){
                 Hexagon temp = emptyBPoints.get(i);
-                if (temp.getX() == x + 1 && temp.getY() == y - 1) {
-                    emptyBPoints.remove(i);
-                }
-                if (temp.getX() == x - 1 && temp.getY() == y - 2) {
-                    emptyBPoints.remove(i);
-                }
-                if (temp.getX() == x + 2 && temp.getY() == y + 1) {
-                    emptyBPoints.remove(i);
+                if (hex.getState() == States.blue) {
+                    if (temp.getX() == x + 1 && temp.getY() == y - 1) {
+                        emptyBPoints.remove(i);
+                    }
+                    if (temp.getX() == x - 1 && temp.getY() == y - 2) {
+                        emptyBPoints.remove(i);
+                    }
+                    if (temp.getX() == x + 2 && temp.getY() == y + 1) {
+                        emptyBPoints.remove(i);
+                    }
+                } else if (hex.getState() == States.red) {
+                    if (temp.getX() == x + 1 && temp.getY() == y - 1) {
+                        emptyBPoints.remove(i);
+                    }
+                    if (temp.getX() == x + 2 && temp.getY() == y + 1) {
+                        emptyBPoints.remove(i);
+                    }
                 }
 
             }
-        } else {
+        } else if (hex.getState() == States.red) {
             for (int i = 0; i < emptyBPoints.size(); i++){
                 Hexagon temp = emptyBPoints.get(i);
                 if (temp.getX() == x - 1 && temp.getY() == y + 1) {
