@@ -4,7 +4,7 @@ import entities.*;
 import gui.GameScreen;
 
 import java.util.Collections;
-import java.util.Random;
+
 
 public class AI {
     private int turn;
@@ -13,8 +13,6 @@ public class AI {
     private Decider decider;
     private Listener listener;
     private Performer performer;
-    private MoveTracker moveTracker;
-    private Valuer valuer;
     private Board board;
     private GameScreen gui;
 
@@ -51,12 +49,6 @@ public class AI {
        Hexagon temp = decider.getBestChoice();
        int x = temp.getX();
        int y = temp.getY();
-        Random r = new Random();
-       // int i = r.nextInt(5);
-       // int j = r.nextInt(5);
-        //analyzer.analyze(listener.getHex(), listener.getBoard());
-//        int xpos = analyzer.emptyBPoints.get(i).getX();
-      //  int ypos = analyzer.emptyBPoints.get(j).getY();
        performer.setHex(x, y, color);
        int [] result = new int [2];
        result[0] = x;
